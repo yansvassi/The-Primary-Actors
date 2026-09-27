@@ -8,7 +8,7 @@ Fall 2026 · Concordia University
 |------|-----------|------|
 | Yana Vassilyev | 40270779 | Team Leader | << Undecided
 | Mia Matsumoto-Depatie | 40314818 | |
-| <Name> | <ID> | |
+| Paulina Aguayo Dupin | 40299470 | |
 
 ## Project
 
