@@ -7,7 +7,7 @@ Fall 2026 · Concordia University
 | Name | Student ID | Role |
 |------|-----------|------|
 | Yana Vassilyev | 40270779 | Team Leader | << Undecided
-| <Name> | <ID> | |
+| Mia Matsumoto-Depatie | 40314818 | |
 | <Name> | <ID> | |
 
 ## Project
