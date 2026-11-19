@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,6 +21,9 @@ public class AvailabilitiesCSV {
         String line;
 
         while((line = reader.readLine()) != null){
+            if(line.trim().isEmpty()) {
+                continue;
+            }
             String[] values = line.split(",");
             String name = values[0].trim();
             String title = values[1].trim();
@@ -38,6 +42,16 @@ public class AvailabilitiesCSV {
 
         reader.close();
         return availabilities;
+    }
+
+    // The filePath should include the .csv extension when passing as a parameter
+    public static void exportCSV(String filePath, List<Availability> availabilities) throws IOException {
+        FileWriter writer = new FileWriter(filePath);
+
+        for(Availability availability: availabilities) {
+            writer.write(availability + "\n");
+        }
+        writer.close();
     }
     
 }
