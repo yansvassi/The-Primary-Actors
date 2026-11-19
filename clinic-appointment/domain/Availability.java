@@ -49,4 +49,9 @@ public class Availability {
     public void markBooked() {
         this.status = AvailabilityStatus.BOOKED;
     }
+
+    @Override
+    public String toString() {
+        return professional.getName() + "," + professional.getTitle() + "," + professional.getSpecialty().getName() + "," + date + "," + startTime + "," + endTime;
+    }
 }

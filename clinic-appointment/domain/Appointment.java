@@ -45,4 +45,11 @@ public class Appointment {
     public LocalTime getEndTime() {
         return endTime;
     }
+
+    @Override
+    public String toString() {
+        return professional.getName() + "," + professional.getSpecialty().getName() + "," + date + "," + startTime 
+            + "," + endTime + "," + patient.getFirstName() + "," + patient.getLastName() + "," + patient.getPhoneNumber()
+            + "," + patient.getRamqNumber();
+    }
 }

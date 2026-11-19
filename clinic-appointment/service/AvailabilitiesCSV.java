@@ -1,3 +1,4 @@
+package service;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,10 +13,11 @@ import java.util.List;
 import domain.Availability;
 import domain.HealthcareProfessional;
 import domain.MedicalSpecialty;
+import repository.HealthcareProfessionalRepository;
 
 public class AvailabilitiesCSV {
 
-    public static List<Availability> importCSV(String filePath) throws IOException, DateTimeParseException {
+    public static List<Availability> importCSV(String filePath, HealthcareProfessionalRepository professionalRepository) throws IOException, DateTimeParseException {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         List<Availability> availabilities = new ArrayList<Availability>();
         String line;
@@ -35,7 +37,11 @@ public class AvailabilitiesCSV {
             LocalTime startTime = LocalTime.parse(values[4].trim(), formatter);
             LocalTime endTime = LocalTime.parse(values[5].trim(), formatter);
 
-            HealthcareProfessional professional = new HealthcareProfessional(name, title, specialty);
+            // Creates a new professional and adds to the repository if not already present
+            HealthcareProfessional professional = professionalRepository
+                    .findByNameAndSpecialty(name, specialty.getName())
+                    .orElseGet(() -> professionalRepository.save(new HealthcareProfessional(name, title, specialty)));
+            
             Availability availability = new Availability(professional, date, startTime, endTime);
             availabilities.add(availability);
         }
@@ -43,6 +49,8 @@ public class AvailabilitiesCSV {
         reader.close();
         return availabilities;
     }
+
+    
 
     // The filePath should include the .csv extension when passing as a parameter
     public static void exportCSV(String filePath, List<Availability> availabilities) throws IOException {
