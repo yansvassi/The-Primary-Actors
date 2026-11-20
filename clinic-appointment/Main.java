@@ -77,7 +77,11 @@ public class Main {
                 availabilityService.searchAvailability(null, "Family Medecine", LocalDate.of(2026, 11, 2), LocalDate.of(2026, 11, 2))
                         .stream().noneMatch(a -> a.getId().equals(amelie9.getId())));
 
-        
+        System.out.println("\n== Export to CSV ==");
+        AvailabilitiesCSV.exportCSV("export_test.csv", availabilities.findAll());
+        long lines = java.nio.file.Files.lines(java.nio.file.Path.of("export_test.csv")).count();
+        check("export writes one row per availability", lines == availabilities.findAll().size());
+        check("exported row uses the CSV format", java.nio.file.Files.readString(java.nio.file.Path.of("export_test.csv")).contains("Dr X,Dr,Family Medecine,2026-11-02,09:00,12:00"));
         System.out.println("\n" + (failures == 0 ? "ALL CHECKS PASSED" : failures + " CHECK(S) FAILED"));
     }
 
